@@ -7,17 +7,29 @@ import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes/heroes.component';
 import { HeroListComponent } from './hero-list/hero-list.component';
 import { HeroDetailsComponent } from './hero-details/hero-details.component';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './services/inMemoryApi';
+import { HeroEditComponent } from './hero-edit/hero-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeroesComponent,
     HeroListComponent,
-    HeroDetailsComponent
+    HeroDetailsComponent,
+    HeroEditComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
+// and returns simulated server responses.
+// Remove it when a real server is ready to receive requests.
+HttpClientInMemoryWebApiModule.forRoot(
+  InMemoryDataService, { dataEncapsulation: false }
+)
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,8 @@
+<div *ngIf="hero$ |async as hero">
+  <h1>{{ hero.name }}</h1>
+
+
+  <a *ngIf="hero.id > 11" [routerLink]="['../', hero.id - 1]">Back</a> |
+  <a [routerLink]="['../..']">Home</a> |
+  <a *ngIf="hero.id < 20" [routerLink]="['../', hero.id + 1]">Next</a>
+</div>

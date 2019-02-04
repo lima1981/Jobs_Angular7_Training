@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import Hero from '../models/hero';
+import { HeroService } from '../services/hero.service';
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-heroes',
@@ -9,15 +11,12 @@ import Hero from '../models/hero';
 export class HeroesComponent implements OnInit {
 
   selectedHero: Hero;
-  heroes: Hero[];
+  heroes$: Observable<Hero[]>;
 
-  constructor() { }
+  constructor(private heroSvc: HeroService) { }
 
   ngOnInit() {
-    this.heroes = [
-      {id: 0, name: 'Superman'},
-      {id: 1, name: 'Batman'}
-    ];
+    this.heroes$ = this.heroSvc.getHeroes();
   }
 
   selectHero(hero: Hero) {

@@ -1,13 +1,13 @@
-<div>
-  {{ heroes | json | uppercase}}
-</div>
-<h1>Heroes</h1>
-<div class="row">
-<app-hero-list class=" mx-2 col-3" [heroes]="heroes"
-[selectedHero]="selectedHero"
-(heroSelected)="selectHero($event)"
-></app-hero-list>
-<div class="col-4" *ngIf="selectedHero">
-  <h2>{{ selectedHero.name }} </h2>
-</div>
+<div *ngIf="heroes$ | async as heroes">
+  <div>
+    {{ heroes | json | uppercase}}
+  </div>
+  <h1>Heroes</h1>
+  <div class="row">
+  <app-hero-list class="mx-2 col-3" [heroes]="heroes"
+  [selectedHero]="selectedHero"
+  (heroSelected)="selectHero($event)"
+  ></app-hero-list>
+  <app-hero-details class="col-4" [selectedHero]="selectedHero"></app-hero-details>
+  </div>
 </div>
