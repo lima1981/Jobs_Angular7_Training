@@ -1,8 +1,32 @@
 <div *ngIf="hero$ |async as hero">
-  <h1>{{ hero.name }}</h1>
+  <h1 [attr.aria-label]="hero.name">{{ hero.name }}</h1>
 
+  <form #heroForm="ngForm" (submit)="onSubmit(hero)">
+    <div>
+      <label for="name">Name</label>
+      <input type="text" #nameField="ngModel" id="name" name="name" [(ngModel)]="hero.name" required minlength="3">
 
-  <a *ngIf="hero.id > 11" [routerLink]="['../', hero.id - 1]">Back</a> |
-  <a [routerLink]="['../..']">Home</a> |
-  <a *ngIf="hero.id < 20" [routerLink]="['../', hero.id + 1]">Next</a>
+    </div>
+    <div>
+      <label for="alterEgo">Alter Ego</label>
+      <input type="text" #alterEgoField="ngModel" id="alterEgo" name="alterEgo" [(ngModel)]="hero.altEgo" required>
+      <div [hidden]="alterEgoField.valid || alterEgoField.untouched">
+          <p>Ego Required</p>
+        </div>
+    </div>
+    <div>
+      <label for="power">Super Power</label>
+      <select id="power" #powerField="ngModel" [(ngModel)]="hero.superPower" name="power" required>
+        <option *ngFor="let power of superPowers" [value]="power">{{ power }}</option>
+      </select>
+      <div [hidden]="powerField.valid ">
+          <p>Power Required</p>
+        </div>
+    </div>
+    <button type="submit" [disabled]="!heroForm.valid" >Submit</button>
+  </form>
+
+  <a *ngIf="hero.id > 11" [routerLink]="['..', hero.id - 1]">Back</a> |
+  <a [routerLink]="['/']">Home</a> |
+  <a *ngIf="hero.id < 20" [routerLink]="['..', hero.id + 1]">Next</a>
 </div>

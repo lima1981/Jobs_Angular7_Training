@@ -1,4 +1,4 @@
-<div *ngIf="heroes$ | async as heroes">
+<div *ngIf="heroes$ | async as heroes; else loading">
   <div>
     {{ heroes | json | uppercase}}
   </div>
@@ -11,3 +11,6 @@
   <app-hero-details class="col-4" [selectedHero]="selectedHero"></app-hero-details>
   </div>
 </div>
+<ng-template #loading>
+  <h2>LOADING.....</h2>
+</ng-template>
