@@ -11,7 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './services/inMemoryApi';
 import { HeroEditComponent } from './hero-edit/hero-edit.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HeroReactiveEditComponent } from './hero-reactive-edit/hero-reactive-edit.component';
 
 @NgModule({
   declarations: [
@@ -19,12 +20,14 @@ import { FormsModule } from '@angular/forms';
     HeroesComponent,
     HeroListComponent,
     HeroDetailsComponent,
-    HeroEditComponent
+    HeroEditComponent,
+    HeroReactiveEditComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
 // and returns simulated server responses.

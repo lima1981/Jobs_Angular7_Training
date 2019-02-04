@@ -1,0 +1,21 @@
+<div>
+  <form [formGroup]="heroForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Name</label>
+      <input id="name" type="text" formControlName="name" />
+    </div>
+    <div>
+      <label for="ego">Alter Ego</label>
+      <input id="ego" type="text" formControlName="altEgo" />
+    </div>
+    <div>
+      <label for="power">Super Power</label>
+      <select id="power" formControlName="superPower" >
+          <option *ngFor="let power of superPowers" [value]="power">{{ power }}</option>
+        </select>
+    </div>
+    <div>
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+</div>
