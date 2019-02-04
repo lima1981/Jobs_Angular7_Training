@@ -1,0 +1,7 @@
+<ul class="list-group">
+  <li class="list-group-item"
+  [class.active]="selectedHero && hero === selectedHero"
+  *ngFor="let hero of heroes"
+  (click)="heroSelected.next(hero)">
+    {{ hero.id }}: {{ hero.name }}</li>
+</ul>
