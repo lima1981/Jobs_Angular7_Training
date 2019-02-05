@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { HeroService } from '../services/hero.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
@@ -13,28 +13,66 @@ export class HeroReactiveEditComponent implements OnInit {
 
   superPowers = ['Flying', 'x-ray', 'really smart'];
 
-  heroForm = new FormGroup(
-  {
-    id: new FormControl(),
-    name: new FormControl(),
-    altEgo: new FormControl(),
-    superPower: new FormControl()
-  });
+  heroForm: FormGroup;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private heroSvc: HeroService) { }
+    private heroSvc: HeroService,
+    private formBuilder: FormBuilder) { }
 
   ngOnInit() {
 
+    this.initForm();
     this.route.params.pipe(
       map(params => params.id),
       switchMap(id => this.heroSvc.getHero(id)),
-      ).subscribe(hero =>
-        this.heroForm.patchValue(hero));
+      ).subscribe(hero => {
+
+        this.setAddresses(hero.addresses);
+        this.heroForm.patchValue(hero);
+        } );
+  }
+
+  initForm() {
+    this.heroForm = this.formBuilder.group(
+      {
+         id: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+        name: ['', Validators.required],
+        altEgo: ['fred', Validators.required],
+        superPower: ['', Validators.required],
+        addresses: this.formBuilder.array([])
+      }
+    );
+  }
+
+  setAddresses(addresses: string[]) {
+    if (!addresses) {
+      return;
+    }
+    const addressControls = addresses.map(a => this.formBuilder.group(
+      {
+        address: []
+      }
+    ));
+    const formArray = this.formBuilder.array(addressControls);
+    this.heroForm.setControl('addresses', formArray);
+  }
+
+  get addresses(): FormArray {
+    return this.heroForm.get('addresses') as FormArray;
+  }
+
+  addAddress() {
+    this.addresses.push(this.formBuilder.group({
+      address: ['']
+    }));
   }
 
   onSubmit() {
+    if (!this.heroForm.valid) {
+      return;
+    }
+
     const hero = this.heroForm.value;
     this.heroSvc.saveHero(hero).subscribe(
       result => this.router.navigateByUrl('/')

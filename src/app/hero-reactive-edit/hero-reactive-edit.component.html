@@ -14,8 +14,21 @@
           <option *ngFor="let power of superPowers" [value]="power">{{ power }}</option>
         </select>
     </div>
+
+    <hr/>
+    <h3>Addresses</h3>
+
+    <button type="button" (click)="addAddress()">Add</button>
+
+    <div formArrayName="addresses">
+      <div *ngFor="let address of addresses.controls; let i = index;" [formGroupName]="i">
+        <label>Address {{ i }}</label>
+        <input formControlName="address" type="text">
+      </div>
+    </div>
     <div>
       <button type="submit">Submit</button>
     </div>
   </form>
+
 </div>

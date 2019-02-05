@@ -4,4 +4,5 @@ export default class Hero {
 
   altEgo: string;
   superPower: string;
+  addresses: string[];
 }
