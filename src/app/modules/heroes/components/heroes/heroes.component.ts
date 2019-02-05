@@ -19,7 +19,7 @@ export class HeroesComponent implements OnInit {
 
   ngOnInit() {
     this.heroes$ = combineLatest(this.heroSvc.getHeroes(), this.searchText$,
-     (x, y) => { return {heroes: x, search: y}} ).pipe(
+     (x, y) => { return {heroes: x, search: y  }} ).pipe(
        map(results => results.heroes.filter(h => h.name.startsWith(results.search)))
      );
 
