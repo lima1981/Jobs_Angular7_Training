@@ -1,0 +1,5 @@
+<div *ngIf="selectedHero">
+  <h2>{{ selectedHero.name }} </h2>
+  <a [routerLink]="['edit', selectedHero.id]">Edit</a>
+  <a [routerLink]="['reactive', selectedHero.id]">Reactive Edit</a>
+</div>

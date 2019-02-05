@@ -2,7 +2,11 @@
   <div>
     {{ heroes | json | uppercase}}
   </div>
-  <h1>Heroes</h1>
+  <h1>Heroes!</h1>
+  <a [routerLink]="['/']">Home</a>
+
+  <app-search (doSearch)="searchText$.next($event)"></app-search>
+
   <div class="row">
   <app-hero-list class="mx-2 col-3" [heroes]="heroes"
   [selectedHero]="selectedHero"
