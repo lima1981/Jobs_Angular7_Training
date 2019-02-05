@@ -19,7 +19,7 @@ import { HeroEffects } from './ngrx/effects';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({heroState: heroReducer}),
+    StoreModule.forRoot({ heroState: heroReducer  }),
     EffectsModule.forRoot([HeroEffects]),
     StoreDevtoolsModule.instrument({maxAge: 30}),
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests

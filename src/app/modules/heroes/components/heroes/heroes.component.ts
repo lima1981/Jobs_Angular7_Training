@@ -24,6 +24,7 @@ export class HeroesComponent implements OnInit {
   ngOnInit() {
     this.heroes$ = this.state.select('heroState', 'heroes');
     this.state.dispatch(new LoadHeroes());
+
     // this.heroes$ = combineLatest(this.heroSvc.getHeroes(), this.searchText$,
     //  (x, y) => { return {heroes: x, search: y  }} ).pipe(
     //    map(results => results.heroes.filter(h => h.name.startsWith(results.search)))

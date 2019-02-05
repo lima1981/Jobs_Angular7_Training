@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import Hero from 'src/app/models/hero';
+import { HeroService } from 'src/app/services/hero.service';
 
 
 @Component({
@@ -10,9 +11,10 @@ import Hero from 'src/app/models/hero';
 export class HeroDetailsComponent implements OnInit {
 
   @Input() selectedHero: Hero;
-  constructor() { }
+  constructor(private svc: HeroService) { }
 
   ngOnInit() {
+    this.svc.getHeroes().subscribe(_ => console.log('fetched'));
   }
 
 }
