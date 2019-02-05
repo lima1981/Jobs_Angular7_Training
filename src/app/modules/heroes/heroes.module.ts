@@ -9,6 +9,10 @@ import { HeroEditComponent } from './components/hero-edit/hero-edit.component';
 import { HeroReactiveEditComponent } from './components/hero-reactive-edit/hero-reactive-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchComponent } from './components/search/search.component';
+import { StoreModule } from '@ngrx/store';
+import { heroReducer } from 'src/app/ngrx/reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { HeroEffects } from 'src/app/ngrx/effects';
 
 @NgModule({
   declarations: [

@@ -1,6 +1,6 @@
 <div *ngIf="heroes$ | async as heroes; else loading">
   <div>
-    {{ heroes | json | uppercase}}
+    {{ heroes | json}}
   </div>
   <h1>Heroes!</h1>
   <a [routerLink]="['/']">Home</a>
