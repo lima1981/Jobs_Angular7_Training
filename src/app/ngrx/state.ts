@@ -8,4 +8,5 @@ export class HeroState {
   heroes: Hero[];
   selectedHero?: Hero;
   error?: string;
+  loading: boolean;
 }
